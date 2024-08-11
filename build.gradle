@@ -3,23 +3,34 @@ buildscript {
     repositories {
         google()
         mavenCentral()
-        maven { url 'dl.bintray.com/jetbrains/markdown' }
+        maven { url = 'https://jitpack.io' } // Add jitpack
+        maven { url = 'dl.bintray.com/jetbrains/markdown' }
+    }
+    ext {
+        kotlin_version = '2.0.10'
+        androidx_core_version = '+'
+        lifecycle_version = '+'
+        constraintlayoutVersion = '+'
+        constraintlayoutcomposeVersion = '+'
+        latestAboutLibsRelease = '+'
     }
 }
 
 plugins {
-    id 'com.android.application' version '8.1.0-alpha09' apply false
-    id 'com.android.library' version '8.1.0-alpha09' apply false
-    id 'org.jetbrains.kotlin.android' version '1.8.10' apply false
-    id 'org.jmailen.kotlinter' version "3.13.0" apply false
+    id 'com.android.application' version '8.5.1' apply false
+    id 'com.android.library' version '8.5.1' apply false
+    id 'org.jetbrains.kotlin.android' version "$kotlin_version" apply false
+    id 'org.jetbrains.kotlin.plugin.serialization' version "$kotlin_version" apply(false)
+    id('org.jetbrains.kotlin.plugin.compose') version "$kotlin_version" apply(false)
+//    id 'org.jmailen.kotlinter' version "3.13.0" apply false
 }
 
-subprojects {
-  apply plugin: "org.jmailen.kotlinter" // Version should be inherited from parent
-  kotlinter {
-      disabledRules = ["no-wildcard-imports"]
-  }
-}
+//subprojects {
+//  apply plugin: "org.jmailen.kotlinter" // Version should be inherited from parent
+//  kotlinter {
+//      disabledRules = ["no-wildcard-imports"]
+//  }
+//}
 
 task clean(type: Delete) {
     delete rootProject.buildDir

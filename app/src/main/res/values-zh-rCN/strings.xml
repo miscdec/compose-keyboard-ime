@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="settings_style_desc" />
+    <string name="settings_style">主题</string>
+    <string name="settings_about">About</string>
+    <string name="about_desc1" />
+    <string name="screen_settings">设置</string>
+    <string name="screen_home">首页</string>
+</resources>

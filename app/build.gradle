@@ -1,15 +1,17 @@
 plugins {
     id 'com.android.application'
     id 'org.jetbrains.kotlin.android'
+    id 'org.jetbrains.kotlin.plugin.compose'
+    id 'org.jetbrains.kotlin.plugin.serialization'
 }
 
 android {
-    compileSdk 33
+    compileSdk 34
 
     defaultConfig {
         applicationId "com.example.composeime"
         minSdk 21
-        targetSdk 32
+        targetSdk 34
         versionCode 1
         versionName "1.0.0"
 
@@ -36,21 +38,97 @@ android {
     buildFeatures {
         compose true
     }
-    composeOptions {
-        kotlinCompilerExtensionVersion = "1.4.4"
-    }
     namespace 'com.example.composeime'
+    packagingOptions {
+        resources {
+            excludes += '/META-INF/{AL2.0,LGPL2.1}'
+        }
+    }
 }
 
 dependencies {
-    implementation "org.jetbrains.kotlin:kotlin-stdlib:1.8.10"
-    implementation 'androidx.appcompat:appcompat:1.6.1'
-    implementation "androidx.compose.ui:ui:1.4.0"
-    implementation "androidx.compose.material:material:1.4.0"
-    implementation "androidx.compose.ui:ui-tooling:1.4.0"
-    implementation "androidx.activity:activity-compose:1.7.0"
-    implementation "androidx.lifecycle:lifecycle-service:2.6.1"
-    implementation 'androidx.lifecycle:lifecycle-runtime-ktx:2.6.1'
-    implementation "com.louiscad.splitties:splitties-systemservices:3.0.0"
-    implementation "com.louiscad.splitties:splitties-views:3.0.0"
+    coreLibraryDesugaring 'com.android.tools:desugar_jdk_libs:2.0.4'
+
+    implementation 'org.eclipse.lsp4j:org.eclipse.lsp4j:0.22.0'
+    implementation 'org.eclipse.lsp4j:org.eclipse.lsp4j.jsonrpc:0.22.0'
+    implementation 'org.eclipse.lsp4j:org.eclipse.lsp4j.websocket:0.22.0'
+
+    implementation 'com.github.kittinunf.fuel:fuel:2.3.1'
+    implementation 'com.github.kittinunf.fuel:fuel-kotlinx-serialization:2.3.1'
+    implementation 'com.github.kittinunf.fuel:fuel-coroutines:2.3.1'
+    implementation 'com.github.kittinunf.fuel:fuel-android:2.3.1'
+
+    implementation "org.jetbrains.kotlinx:kotlinx-serialization-core:1.7.1"
+    implementation('org.jetbrains.kotlinx:kotlinx-serialization-json:1.7.1')
+
+    def ktor_version = '2.3.9'
+    implementation "io.ktor:ktor-client-websockets:$ktor_version"
+    implementation "io.ktor:ktor-client-cio:$ktor_version"
+
+
+//    implementation('com.charleskorn.kaml:kaml:0.57.0')
+//    implementation('com.akuleshov7:ktoml-core:0.5.1')
+//    implementation('com.akuleshov7:ktoml-file:0.5.1')
+
+    api("org.apache.commons:commons-math3:3.2")
+
+    def composeBom = platform('androidx.compose:compose-bom:2024.06.00')
+    implementation composeBom
+    androidTestImplementation composeBom
+    implementation 'androidx.compose.ui:ui-graphics'
+    // Choose one of the following:
+    // Material Design 3
+    api 'androidx.compose.material3:material3'
+    // or Material Design 2
+    implementation 'androidx.compose.material:material'
+    // or skip Material Design and build directly on top of foundational components
+    api 'androidx.compose.foundation:foundation'
+    // or only import the main APIs for the underlying toolkit systems,
+    // such as input and measurement/layout
+    api 'androidx.compose.ui:ui'
+    // Android Studio Preview support
+    api 'androidx.compose.ui:ui-tooling-preview'
+    debugApi 'androidx.compose.ui:ui-tooling'
+    // UI Tests
+    androidTestApi 'androidx.compose.ui:ui-test-junit4'
+    debugApi 'androidx.compose.ui:ui-test-manifest'
+    // Optional - Integration with LiveData
+//    api 'androidx.compose.runtime:runtime-livedata'
+
+    // Optional - Included automatically by material, only add when you need
+    // the icons but not the material library (e.g. when using Material3 or a
+    // custom design system based on Foundation)
+    api 'androidx.compose.material:material-icons-core'
+    // Optional - Add full set of material icons
+    api 'androidx.compose.material:material-icons-extended'
+    // Optional - Add window size utils
+    api 'androidx.compose.material3:material3-window-size-class'
+
+    implementation 'androidx.activity:activity-compose:1.9.1'
+
+    api "androidx.core:core-ktx:$androidx_core_version"
+
+    api("androidx.lifecycle:lifecycle-viewmodel-compose:$lifecycle_version")
+    api("androidx.lifecycle:lifecycle-runtime-compose:$lifecycle_version")
+
+    implementation "androidx.lifecycle:lifecycle-service:$lifecycle_version"
+    implementation "androidx.lifecycle:lifecycle-runtime-ktx:$lifecycle_version"
+
+    implementation "androidx.constraintlayout:constraintlayout:$constraintlayoutVersion"
+    // To use constraintlayout in compose
+    implementation "androidx.constraintlayout:constraintlayout-compose:$constraintlayoutcomposeVersion"
+
+    implementation('androidx.navigation:navigation-compose:2.7.7')
+
+    implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
+
+//    implementation 'androidx.appcompat:appcompat:1.6.1'
+    implementation 'com.google.accompanist:accompanist-drawablepainter:0.34.0'
+
+    implementation "androidx.compose.ui:ui-text-google-fonts"
+
+    implementation 'com.louiscad.splitties:splitties-systemservices:3.0.0'
+//    implementation "com.louiscad.splitties:splitties-views:3.0.0"
+
+
 }
